@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useMemo, useState, useEffect } from 'react';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,60 +9,40 @@ import { Search, Users, Clock, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { coursesByUniversity } from '@/lib/sample-data';
 
-type Course = {
-	id: string;
-	title: string;
-	description?: string;
-	level?: string;
-	duration?: string;
-	students?: number;
-	rating?: number;
-	modules?: number;
-	projects?: number;
-};
 
-const sampleCourses: Course[] = [
-	{
-		id: '1',
-		title: 'BSc CSIT',
-		description: 'Basics of programming, algorithms and data structures.',
-		level: 'Beginner',
-		duration: '12 weeks',
-		students: 1200,
-		rating: 4.6,
-		modules: 12,
-		projects: 2,
-	},
-	{
-		id: '2',
-		title: 'BBA',
-		description: 'In-depth coverage of data structures and algorithmic techniques.',
-		level: 'Intermediate',
-		duration: '14 weeks',
-		students: 800,
-		rating: 4.7,
-		modules: 14,
-		projects: 4,
-	},
-	{
-		id: '3',
-		title: 'BBS',
-		description: 'Concepts of OS, concurrency, memory management and scheduling.',
-		level: 'Intermediate',
-		duration: '13 weeks',
-		students: 600,
-		rating: 4.5,
-		modules: 10,
-		projects: 3,
-	},
-];
+
+
 
 // use shared sample data
 
 const Courses: React.FC = () => {
 	const { universityid, coursesid } = useParams();
+		const navigate = useNavigate();
+		const location = useLocation();
+
+		// If the URL is /:universityid/:coursesid (no semid), redirect to default semester 1
+		useEffect(() => {
+			if (universityid && coursesid) {
+				// build expected base path
+				const base = `/${universityid}/${coursesid}`;
+				if (location.pathname === base) {
+					navigate(`${base}/1`, { replace: true });
+				}
+			}
+		}, [universityid, coursesid, location.pathname, navigate]);
 	const [query, setQuery] = useState('');
 	const [level, setLevel] = useState('All');
+
+	// Map src/assets images so courses can reference images by filename/base name.
+	const courseAssetModules = import.meta.glob('../../../assets/*.{png,jpg,jpeg,svg,webp,PNG}', { eager: true }) as Record<string, any>;
+	const courseAssetMap: Record<string, string> = {};
+	for (const p of Object.keys(courseAssetModules)) {
+		const parts = p.split('/');
+		const filename = parts[parts.length - 1];
+		const key = filename.split('.')[0].toLowerCase();
+		const module = courseAssetModules[p];
+		courseAssetMap[key] = module.default ?? module;
+	}
 
 		const selectedCourses = useMemo(() => coursesByUniversity[universityid ?? ''] ?? [], [universityid]);
 
@@ -77,7 +57,12 @@ const Courses: React.FC = () => {
 			});
 		}, [query, level, selectedCourses]);
 
-	return (
+		const goToSemesters = (courseId: string) => {
+			if (!universityid) return;
+			navigate(`/${universityid}/${courseId}`);
+		};
+
+		return (
 		<div className="min-h-screen bg-gray-50">
 			<Header />
 
@@ -111,8 +96,18 @@ const Courses: React.FC = () => {
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 						{filtered.map(course => (
-							<Card key={course.id} className="hover-lift cursor-pointer overflow-hidden">
+							<Card
+								key={course.id}
+								className="hover-lift cursor-pointer overflow-hidden"
+								onClick={() => goToSemesters(course.id)}
+								role="button"
+								tabIndex={0}
+								onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { goToSemesters(course.id); } }}
+							>
 								<div className="aspect-video bg-gradient-to-br from-indigo-600 to-purple-600 relative">
+									{course.image ? (
+										<img src={courseAssetMap[(course.image.split('/').pop() || '').split('.')[0].toLowerCase()] ?? course.image} alt={course.title} className="w-full h-full object-cover" />
+									) : null}
 									<Badge className="absolute top-4 left-4 bg-white text-gray-900">{course.level}</Badge>
 								</div>
 
@@ -130,7 +125,7 @@ const Courses: React.FC = () => {
 
 									<div className="flex gap-2">
 									{/* Navigate to the first semester by default (/:universityid/1) */}
-										<Link to={`/${universityid}/${course.id}`}>
+										<Link to={`/${universityid}/${course.id}/`}>
 											<Button>View semesters</Button>
 										</Link>
 										<Button variant="outline">Bookmark</Button>

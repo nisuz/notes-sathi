@@ -8,6 +8,7 @@ export type Course = {
   rating?: number;
   modules?: number;
   projects?: number;
+  image?: string;
 };
 
 export const sampleCourses: Course[] = [
@@ -21,6 +22,7 @@ export const sampleCourses: Course[] = [
     rating: 4.6,
     modules: 12,
     projects: 2,
+    image: 'assets/bsc-csit.png',
   },
   {
     id: 'bba',
@@ -32,6 +34,7 @@ export const sampleCourses: Course[] = [
     rating: 4.7,
     modules: 14,
     projects: 4,
+    image: 'assets/bba.png',
   },
   {
     id: 'bbs',
@@ -43,6 +46,7 @@ export const sampleCourses: Course[] = [
     rating: 4.5,
     modules: 10,
     projects: 3,
+    image: 'assets/bbs.png',
   },
 ];
 

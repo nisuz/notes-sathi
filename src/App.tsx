@@ -13,7 +13,7 @@ import NotFound from "./pages/NotFound";
 import Universities from "./pages/[universityid]/Universities";
 import UniversityCourses from "./pages/[universityid]/[coursesid]/Courses";
 import Semesters from "./pages/[universityid]/[coursesid]/[semid]/Semesters";
-import Subjects from "./pages/[universityid]/[coursesid]/[semid]/Subjects";
+import Subjects from "./pages/[universityid]/[coursesid]/[semid]/[subid]/Subjects";
 
 
 
@@ -35,11 +35,9 @@ const App = () => (
           <Route path="/universities/:universityid/:coursesid" element={<UniversityCourses />} />
           {/* top-level shorthand route so /tu shows TU's courses */}
           <Route path="/:universityid" element={<UniversityCourses />} />
-          {/* top-level course route so /tu/bsccsit shows course page */}
-          <Route path="/:universityid/:coursesid" element={<UniversityCourses />} />
           {/* semesters route, e.g. /tu/bsccsit/1 */}
-          <Route path="/:universityid/:coursesid/:semid" element={<Semesters />} />
-          <Route path="/:universityid/:coursesid/:semid/:subjectid" element={<Subjects />} />
+          <Route path="/:universityid/:coursesid/" element={<Semesters />} />
+          <Route path="/:universityid/:coursesid/:semid/" element={<Subjects />} />
             {/* fallback subjects route when coursesid is not present in the URL */}
             <Route path="/:universityid/:semid/subjects" element={<Subjects />} />
           {/* <Route path="/about" element={<About />} /> */}
