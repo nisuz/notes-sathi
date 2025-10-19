@@ -164,7 +164,7 @@ const Help = () => {
                 <div className="pt-6 border-t">
                   <h4 className="font-semibold text-gray-900 mb-2">Email Support</h4>
                   <p className="text-sm text-gray-600 mb-4">
-                    Send us an email at support@eduhub.com and we'll get back to you within 24 hours.
+                    Send us an email at support@NoteSathi.com and we'll get back to you within 24 hours.
                   </p>
                   <Button className="w-full">Send Email</Button>
                 </div>

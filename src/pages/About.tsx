@@ -49,7 +49,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              About <span className="gradient-text">EduHub</span>
+              About <span className="gradient-text">NoteSathi</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We're on a mission to make quality computer science and IT education accessible to everyone, 
@@ -81,7 +81,7 @@ const About = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                At EduHub, we believe that quality education should be accessible to everyone, regardless of 
+                At NoteSathi, we believe that quality education should be accessible to everyone, regardless of 
                 their background or financial situation. We're committed to breaking down barriers and 
                 creating opportunities for learners worldwide.
               </p>
@@ -148,7 +148,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

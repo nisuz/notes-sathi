@@ -78,7 +78,7 @@ const Footer = () => {
               <div className="w-12 h-12 rounded-lg gradient-bg flex items-center justify-center">
                 <BookOpen className="w-7 h-7 text-white" />
               </div>
-              <span className="text-2xl font-bold">EduHub</span>
+              <span className="text-2xl font-bold">NoteSathi</span>
             </Link>
             
             <p className="text-gray-400 mb-6 leading-relaxed">
@@ -89,7 +89,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-400">
                 <Mail className="w-5 h-5" />
-                <span>contact@eduhub.com</span>
+                <span>contact@NoteSathi.com</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-400">
                 <Phone className="w-5 h-5" />
@@ -177,7 +177,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © 2024 EduHub. All rights reserved. Empowering education through technology.
+              © 2024 NoteSathi. All rights reserved. Empowering education through technology.
             </p>
             
             <div className="flex items-center space-x-4">

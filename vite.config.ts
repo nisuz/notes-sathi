@@ -9,6 +9,9 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // Include uppercase PNG assets (NOU.PNG) and similar uppercase file extensions
+  // so Vite treats them as static assets during import analysis.
+  assetsInclude: ['**/*.PNG'],
   plugins: [
     react(),
     mode === 'development' &&

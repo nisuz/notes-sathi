@@ -14,8 +14,9 @@ const Header = () => {
     { name: 'Courses', href: '/courses', icon: BookOpen },
     { name: 'Resources', href: '/resources', icon: Download },
     { name: 'Community', href: '/community', icon: Users },
-    { name: 'About', href: '/about', icon: Info },
+    // { name: 'About', href: '/about', icon: Info },
     { name: 'Help', href: '/help', icon: HelpCircle },
+    {name:'Universities', href:'/universities', icon:BookOpen} // Example of adding a new route
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -29,7 +30,7 @@ const Header = () => {
             <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
               <BookOpen className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold gradient-text">EduHub</span>
+            <span className="text-2xl font-bold gradient-text">NoteSathi</span>
           </Link>
 
           {/* Desktop Navigation */}
