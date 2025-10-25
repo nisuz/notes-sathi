@@ -83,7 +83,7 @@ const Semesters: React.FC = () => {
                 </div>
 
                 <CardContent>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pt-4">
                     <div className="text-sm text-gray-600">3 notes • 2 attachments</div>
                     <div className="flex items-center gap-2">
                       <Button onClick={() => navigate(subjectsPath)}>
